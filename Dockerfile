@@ -10,7 +10,8 @@ ADD https://nagios-plugins.org/download/nagios-plugins-${NAGIOS_PLUGINS_VERSION}
 ADD https://github.com/NagiosEnterprises/nrpe/releases/download/nrpe-${NAGIOS_NRPE_VERSION}/nrpe-${NAGIOS_NRPE_VERSION}.tar.gz /usr/local/src/
 RUN dnf -y install dnf-plugins-core;
 RUN dnf -y config-manager --set-enabled crb devel extras plus;
-RUN dnf -y module enable php:8.2;
+RUN dnf -y install https://rpms.remirepo.net/enterprise/remi-release-9.rpm;
+RUN dnf -y module enable php:remi-8.3;
 RUN dnf -y install epel-release;
 RUN dnf -y \
       install \
@@ -32,9 +33,9 @@ RUN dnf -y \
         libpq \
         libpq-devel \
         libtool-ltdl-devel \
-        mod_auth_openoidc \
+        mod_auth_openidc \
         mod_ldap \
-        mod_secutiry \
+        mod_security \
         mod_ssl \
         mysql-common \
         mysql-devel \
@@ -45,6 +46,21 @@ RUN dnf -y \
         openldap-clients \
         openldap-devel \
         openssl-devel \
+        php83-php \
+        php83-php-soap \
+        php83-php-process \
+        php83-php-opcache \
+        php83-php-odbc \
+        php83-php-mysqlnd \
+        php83-php-mbstring \
+        php83-php-intl \
+        php83-php-gd \
+        php83-php-pecl-xdebug3 \
+        php83-php-pecl-redis5 \
+        php83-php-pecl-msgpack \
+        php83-php-pecl-imagick \
+        php83-php-pecl-igbinary \
+        php83-php-pecl-json-post \
         perl \
         perl-devel \
         perl-Text-Glob \
