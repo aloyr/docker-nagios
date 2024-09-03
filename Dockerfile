@@ -10,6 +10,7 @@ ADD https://nagios-plugins.org/download/nagios-plugins-${NAGIOS_PLUGINS_VERSION}
 ADD https://github.com/NagiosEnterprises/nrpe/releases/download/nrpe-${NAGIOS_NRPE_VERSION}/nrpe-${NAGIOS_NRPE_VERSION}.tar.gz /usr/local/src/
 RUN dnf -y install dnf-plugins-core;
 RUN dnf -y config-manager --set-enabled crb devel extras plus;
+RUN dnf -y module enable php:8.2;
 RUN dnf -y install epel-release;
 RUN dnf -y \
       install \
@@ -20,6 +21,8 @@ RUN dnf -y \
         gd-devel \
         glibc-devel \
         gnutls-devel \
+        httpd \
+        httpd-devel \
         kernel-headers \
         krb5-devel \
         libdb-devel \
@@ -29,6 +32,10 @@ RUN dnf -y \
         libpq \
         libpq-devel \
         libtool-ltdl-devel \
+        mod_auth_openoidc \
+        mod_ldap \
+        mod_secutiry \
+        mod_ssl \
         mysql-common \
         mysql-devel \
         net-snmp \
