@@ -9,11 +9,11 @@ ADD https://github.com/NagiosEnterprises/nagioscore/releases/download/nagios-${N
 ADD https://nagios-plugins.org/download/nagios-plugins-${NAGIOS_PLUGINS_VERSION}.tar.gz /usr/local/src/
 ADD https://github.com/NagiosEnterprises/nrpe/releases/download/nrpe-${NAGIOS_NRPE_VERSION}/nrpe-${NAGIOS_NRPE_VERSION}.tar.gz /usr/local/src/
 RUN dnf -y install dnf-plugins-core;
-RUN dnf -y config-manager --set-enabled crb devel extras plus;
+RUN dnf -y config-manager --set-enabled crb extras plus;
 RUN dnf -y install https://rpms.remirepo.net/enterprise/remi-release-9.rpm;
 RUN dnf -y module enable php:remi-8.3;
 RUN dnf -y install epel-release;
-RUN dnf -y \
+RUN dnf -y --enablerepo devel \
       install \
         bind-utils \
         compat-openssl11 \
@@ -61,6 +61,7 @@ RUN dnf -y \
         php83-php-pecl-imagick \
         php83-php-pecl-igbinary \
         php83-php-pecl-json-post \
+        python3-pip \
         perl \
         perl-devel \
         perl-Text-Glob \
@@ -79,6 +80,8 @@ RUN dnf -y \
 RUN dnf -y group install "Development Tools";
 RUN cd /usr/bin; \
     ln -s python3 python; \
+    pip install supervisor; \
+    /usr/libexec/httpd-ssl-gencerts; \
     cd /usr/local/src; \
     tar -zvxf nagios-${NAGIOS_VERSION}.tar.gz; \
     ls -l /usr/local/src; \
