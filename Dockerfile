@@ -97,8 +97,8 @@ RUN cd /usr/bin; \
     make install-commandmode; \
     make install-config; \
     make install-webconf; \
-    make install-exfoliation; \
-    make install-classicui;
+    make install-classicui; \
+    make install-exfoliation;
 RUN cd /usr/local/src; \
     tar -zvxf nagios-plugins-${NAGIOS_PLUGINS_VERSION}.tar.gz; \
     cd nagios-plugins-${NAGIOS_PLUGINS_VERSION}; \
@@ -116,5 +116,6 @@ RUN cd /usr/local/src; \
     make install-plugin; \
     make install-daemon; \
     make install-config;
+ADD htpasswd.users /usr/local/nagios/etc/htpasswd.users
 ADD supervisord.conf /supervisord.conf
 CMD ["supervisord","-c","/supervisord.conf"]
