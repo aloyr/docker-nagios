@@ -116,4 +116,4 @@ RUN cd /usr/local/src; \
     make install-daemon; \
     make install-config;
 ADD supervisord.conf /supervisord.conf
-CMD ['supervisord','-c','/supervisord.conf']
+CMD ["supervisord","-c","/supervisord.conf"]
