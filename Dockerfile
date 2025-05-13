@@ -86,6 +86,7 @@ RUN cd /usr/bin; \
     tar -zvxf nagios-${NAGIOS_VERSION}.tar.gz; \
     ls -l /usr/local/src; \
     cd nagios-${NAGIOS_VERSION}; \
+    useradd -r nagios; \
     ./configure; \
     make all -j8; \
     make install test; \
